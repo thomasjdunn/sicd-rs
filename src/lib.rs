@@ -13,8 +13,10 @@ pub mod v1_3_0;
 
 #[derive(Error, Debug)]
 pub enum SicdError {
+    /// "unknown sicd version {}"
     #[error("unknown sicd version {0}")]
     VersionError(String),
+    /// "metadata for version {} is not implemented"
     #[error("metadata for version {0} is not implemented")]
     Unimpl(String),
 }
@@ -30,7 +32,7 @@ pub struct Sicd {
     pub version: SicdVersion,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, PartialEq)]
 pub enum SicdVersion {
     V0_3_1,
     V0_4_0,
@@ -72,6 +74,33 @@ pub enum SicdMeta {
     V1(v1_3_0::SicdMeta),
 }
 
+impl SicdMeta {
+    pub fn get_v0_3_1_meta(self) -> SicdError {
+        SicdError::Unimpl("0.3.1".to_string())
+    }
+    pub fn get_v0_4_0_meta(self) -> Option<dep::v0_4_0::SicdMeta> {
+        match self {
+            Self::V0_4_0(meta) => Some(meta),
+            _ => None
+        }
+    }
+    pub fn get_v0_4_1_meta(self) -> SicdError {
+        SicdError::Unimpl("0.4.1".to_string())
+    }
+    pub fn get_v0_5_0_meta(self) -> Option<dep::v0_5_0::SicdMeta> {
+        match self {
+            Self::V0_5_0(meta) => Some(meta),
+            _ => None
+        }
+    }
+    pub fn get_v1_meta(self) -> Option<v1_3_0::SicdMeta> {
+        match self {
+            Self::V1(meta) => Some(meta),
+            _ => None
+        }
+    }
+}
+
 /// Construct a [Sicd] object from a file `path`.
 ///
 /// # Example
@@ -81,7 +110,7 @@ pub enum SicdMeta {
 ///
 ///     let sicd_path = Path::new("../example.nitf");
 ///     let sicd = read_sicd(sicd_path);
-pub fn read_sicd(path: &Path) -> Sicd {
+pub fn read_unknown_sicd(path: &Path) -> Sicd {
     let mut file = File::open(path).unwrap();
     Sicd::from_file(&mut file)
 }
