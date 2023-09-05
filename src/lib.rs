@@ -101,15 +101,15 @@ impl SicdMeta {
     }
 }
 
-/// Construct a [Sicd] object from a file `path`.
+/// Construct a generic [Sicd] object from a file `path`.
 ///
 /// # Example
 ///
 ///     use std::path::Path;
-///     use sicd_rs::read_sicd;
+///     use sicd_rs::read_unknown_sicd;
 ///
 ///     let sicd_path = Path::new("../example.nitf");
-///     let sicd = read_sicd(sicd_path);
+///     let sicd = read_unknown_sicd(sicd_path);
 pub fn read_unknown_sicd(path: &Path) -> Sicd {
     let mut file = File::open(path).unwrap();
     Sicd::from_file(&mut file)
