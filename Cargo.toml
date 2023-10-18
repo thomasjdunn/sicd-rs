@@ -6,11 +6,9 @@ license = "MIT OR Apache-2.0"
 description = "Crate to interface with SICD files."
 homepage = "https://github.com/holmesv3/sicd-rs"
 readme = "README-crates.md"
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 thiserror = "^1.0"
-memmap2 = "0.5.10"
 num-complex = "0.4.3"
 nitf-rs = {version = "0.2.0", path = "../nitf-rs"}
 ndarray = {version = "^0.15"}

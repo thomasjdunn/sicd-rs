@@ -1,4 +1,9 @@
 //! Sensor Independent Complex Data support
+//! 
+//! The primary interface for general sicd reading is `read_unknown_sicd`. 
+//!
+//! It is a future goal to have functions for each version, but for now a single 
+//! function call and `match` statement are used. 
 use quick_xml::de::from_str;
 use serde::Deserialize;
 use std::fs::File;
@@ -101,15 +106,20 @@ impl SicdMeta {
     }
 }
 
-/// Construct a [Sicd] object from a file `path`.
+/// Construct a [Sicd] object from a file `path`. This is specifically for cases
+/// where the version of the Sicd is not known and makes use of several `enums` 
+/// to parse the data. 
 ///
 /// # Example
-///
+/// 
 ///     use std::path::Path;
-///     use sicd_rs::read_sicd;
+///     use sicd_rs::read_unknown_sicd;
+///     use sicd_rs::SicdVersion;
 ///
 ///     let sicd_path = Path::new("../example.nitf");
-///     let sicd = read_sicd(sicd_path);
+///     let sicd = read_unknown_sicd(sicd_path);
+///     // Then use `match` statement to extract metadata
+///   
 pub fn read_unknown_sicd(path: &Path) -> Sicd {
     let mut file = File::open(path).unwrap();
     Sicd::from_file(&mut file)
