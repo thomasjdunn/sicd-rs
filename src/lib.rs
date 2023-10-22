@@ -1,6 +1,6 @@
 //! Sensor Independent Complex Data support
 //! 
-//! The primary interface for general sicd reading is `read_unknown_sicd`. 
+//! The primary interface for general sicd reading is `read_sicd`. 
 //!
 //! It is a future goal to have functions for each version, but for now a single 
 //! function call and `match` statement are used. 
@@ -72,9 +72,9 @@ impl FromStr for SicdVersion {
 
 #[derive(Debug)]
 pub enum SicdMeta {
-    V0_3_1,
+    V0_3_1,  // Not implemented
     V0_4_0(dep::v0_4_0::SicdMeta),
-    V0_4_1,
+    V0_4_1,  // Not implemented
     V0_5_0(dep::v0_5_0::SicdMeta),
     V1(v1_3_0::SicdMeta),
 }
@@ -106,21 +106,22 @@ impl SicdMeta {
     }
 }
 
-/// Construct a [Sicd] object from a file `path`. This is specifically for cases
-/// where the version of the Sicd is not known and makes use of several `enums` 
-/// to parse the data. 
+/// Construct a [Sicd] object from a file `path`. 
+/// 
+/// This is specifically for cases where the version of the Sicd is not known 
+/// and makes use of several `enums` to parse the data. 
 ///
 /// # Example
-/// 
-///     use std::path::Path;
-///     use sicd_rs::read_unknown_sicd;
-///     use sicd_rs::SicdVersion;
+/// ```
+/// use std::path::Path;
+/// use sicd_rs::SicdVersion;
 ///
-///     let sicd_path = Path::new("../example.nitf");
-///     let sicd = read_unknown_sicd(sicd_path);
-///     // Then use `match` statement to extract metadata
+/// let sicd_path = Path::new("../example.nitf");
+/// let sicd = sicd_rs::read_sicd(sicd_path);
+/// // Then use `match` statement to extract metadata
+/// ```
 ///   
-pub fn read_unknown_sicd(path: &Path) -> Sicd {
+pub fn read_sicd(path: &Path) -> Sicd {
     let mut file = File::open(path).unwrap();
     Sicd::from_file(&mut file)
 }
