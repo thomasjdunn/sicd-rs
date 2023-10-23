@@ -24,7 +24,7 @@ pub struct NoiseLevel {
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 pub struct NoiseLevelType {
     #[serde(rename = "$text")]
-    pub value: NoiseLevelTypeEnum
+    pub value: NoiseLevelTypeEnum,
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 pub enum NoiseLevelTypeEnum {

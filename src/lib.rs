@@ -10,12 +10,12 @@ use std::ptr::null;
 use std::slice::from_raw_parts;
 use std::str::{from_utf8, FromStr};
 
-use ndarray::{Array2, ArrayView2, par_azip};
+use ndarray::{par_azip, Array2, ArrayView2};
 
-use thiserror::Error;
-use serde::Deserialize;
 use num_complex::Complex;
 use quick_xml::de::from_str;
+use serde::Deserialize;
+use thiserror::Error;
 
 use nitf_rs::Nitf;
 
@@ -31,12 +31,14 @@ pub enum SicdError {
     #[error("metadata for version {0} is not implemented")]
     Unimpl(String),
     /// "error using metadata. Perhaps the metadata version does not have a field you're expecting"
-    #[error("error using metadata. Perhaps the metadata version does not have a field you're expecting")]
+    #[error(
+        "error using metadata. Perhaps the metadata version does not have a field you're expecting"
+    )]
     MetaUsage,
 }
 
 /// SICD file structure
-/// 
+///
 // TODO: Implement printing (Debug, Display?)
 pub struct Sicd {
     /// Nitf file object and associated metadata
@@ -47,7 +49,7 @@ pub struct Sicd {
     pub version: SicdVersion,
     /// Image data from Nitf Image segements
     pub image_data: Vec<ImageData>,
-    _file: File
+    _file: File,
 }
 
 /// Image data structure. Currently only implements Complex<f32> data type
@@ -55,15 +57,15 @@ pub struct Sicd {
 pub struct ImageData {
     /// Complex<f32> image data array
     pub array: Array2<Complex<f32>>,
-    
+
     byte_slice_ptr: *const u8,
     byte_slice_len: usize,
     new_size: usize,
 }
 impl Default for ImageData {
     fn default() -> Self {
-        Self { 
-            byte_slice_ptr: null(), 
+        Self {
+            byte_slice_ptr: null(),
             byte_slice_len: usize::default(),
             new_size: usize::default(),
             array: Array2::default((0, 0)),
@@ -77,9 +79,7 @@ impl ImageData {
         im_data.byte_slice_len = slice.len();
         im_data.new_size = im_data.byte_slice_len / std::mem::size_of::<Complex<f32>>();
         let f32_ptr = im_data.byte_slice_ptr as *const [[u8; 4]; 2]; // bit layout of complex number
-        let float_slice = unsafe {
-            from_raw_parts(f32_ptr, im_data.new_size)
-        };
+        let float_slice = unsafe { from_raw_parts(f32_ptr, im_data.new_size) };
         let aview = ArrayView2::from_shape((n_rows, n_cols), float_slice).unwrap();
         im_data.array = Array2::zeros((n_rows, n_cols));
 
@@ -126,9 +126,9 @@ impl FromStr for SicdVersion {
 
 #[derive(Debug)]
 pub enum SicdMeta {
-    V0_3_1,  // Not implemented
+    V0_3_1, // Not implemented
     V0_4_0(dep::v0_4_0::SicdMeta),
-    V0_4_1,  // Not implemented
+    V0_4_1, // Not implemented
     V0_5_0(dep::v0_5_0::SicdMeta),
     V1(v1_3_0::SicdMeta),
 }
@@ -140,7 +140,7 @@ impl SicdMeta {
     pub fn get_v0_4_0_meta(self) -> Option<dep::v0_4_0::SicdMeta> {
         match self {
             Self::V0_4_0(meta) => Some(meta),
-            _ => None
+            _ => None,
         }
     }
     pub fn get_v0_4_1_meta(self) -> SicdError {
@@ -149,13 +149,13 @@ impl SicdMeta {
     pub fn get_v0_5_0_meta(self) -> Option<dep::v0_5_0::SicdMeta> {
         match self {
             Self::V0_5_0(meta) => Some(meta),
-            _ => None
+            _ => None,
         }
     }
     pub fn get_v1_meta(self) -> Option<v1_3_0::SicdMeta> {
         match self {
             Self::V1(meta) => Some(meta),
-            _ => None
+            _ => None,
         }
     }
 }
