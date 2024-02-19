@@ -3,27 +3,21 @@ pub use crate::dep::v0_4_0::antenna::{Array, Elem, EB};
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize, PartialEq, Clone)]
+#[serde(rename_all = "PascalCase")]
 pub struct Antenna {
-    #[serde(rename = "Tx")]
     pub tx: Option<AntennaType>,
-    #[serde(rename = "Rcv")]
     pub rcv: Option<AntennaType>,
-    #[serde(rename = "TwoWay")]
     pub two_way: Option<AntennaType>,
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]
+#[serde(rename_all = "PascalCase")]
 pub struct AntennaType {
-    #[serde(rename = "XAxisPoly")]
     pub x_axis_poly: XyzPoly,
-    #[serde(rename = "YAxisPoly")]
     pub y_axis_poly: XyzPoly,
-    #[serde(rename = "FreqZero")]
     pub freq_zero: f64,
     #[serde(rename = "EB")]
     pub eb: Option<EB>,
-    #[serde(rename = "Array")]
     pub array: Array,
-    #[serde(rename = "Elem")]
     pub elem: Option<Elem>,
     #[serde(rename = "GainBSPoly")]
     pub gain_bs_poly: Option<Poly1D>,

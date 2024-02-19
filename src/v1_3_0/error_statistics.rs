@@ -6,52 +6,41 @@ pub use crate::dep::v0_4_0::error_statistics::{
 };
 
 #[derive(Debug, Deserialize, PartialEq, Clone)]
+#[serde(rename_all = "PascalCase")]
 pub struct ErrorStatistics {
     #[serde(rename = "CompositeSCP")]
     pub composite_scp: Option<CompositeSCP>,
-    #[serde(rename = "Components")]
     pub components: Option<Components>,
-    #[serde(rename = "Unmodeled")]
     pub unmodeled: Option<Unmodeled>,
-    #[serde(rename = "AdditionalParams")]
     pub additional_params: Option<Vec<Parameter>>,
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]
+#[serde(rename_all = "PascalCase")]
 pub struct CompositeSCP {
-    #[serde(rename = "Rg")]
     pub rg: f64,
-    #[serde(rename = "Az")]
     pub az: f64,
-    #[serde(rename = "RgAz")]
     pub rg_az: f64,
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]
+#[serde(rename_all = "PascalCase")]
 pub struct Components {
-    #[serde(rename = "PosVelErr")]
     pub pos_vel_err: PosVelErr,
-    #[serde(rename = "RadarSensor")]
     pub radar_sensor: RadarSensor,
-    #[serde(rename = "TropoErro")]
     pub tropo_erro: Option<TropoError>,
-    #[serde(rename = "IonoError")]
     pub iono_error: Option<IonoError>,
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]
+#[serde(rename_all = "PascalCase")]
 pub struct Unmodeled {
-    #[serde(rename = "Xrow")]
     pub xrow: f64,
-    #[serde(rename = "Ycol")]
     pub ycol: f64,
-    #[serde(rename = "XrowYcol")]
     pub xrow_ycol: f64,
-    #[serde(rename = "UnmodeledDecorr")]
     pub unmodeled_decorr: Option<UnmodeledDecorr>,
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]
+#[serde(rename_all = "PascalCase")]
 pub struct UnmodeledDecorr {
-    #[serde(rename = "Xrow")]
     pub xrow: Decorr,
-    #[serde(rename = "Ycol")]
     pub ycol: Decorr,
 }
 

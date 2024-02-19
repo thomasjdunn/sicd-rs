@@ -2,8 +2,8 @@ use super::Poly2D;
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize, PartialEq, Clone)]
+#[serde(rename_all = "PascalCase")]
 pub struct Radiometric {
-    #[serde(rename = "NoiseLevel")]
     pub noise_level: Option<NoiseLevel>,
     #[serde(rename = "RCSSFPoly")]
     pub rcssf_poly: Option<Poly2D>,
@@ -15,10 +15,9 @@ pub struct Radiometric {
     pub gamma_zero_sf_poly: Option<Poly2D>,
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]
+#[serde(rename_all = "PascalCase")]
 pub struct NoiseLevel {
-    #[serde(rename = "NoiseLevelType")]
     pub noise_level_type: NoiseLevelType,
-    #[serde(rename = "NoisePoly")]
     pub noise_poly: Poly2D,
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]

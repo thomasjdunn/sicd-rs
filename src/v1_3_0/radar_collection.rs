@@ -3,20 +3,14 @@ pub use crate::dep::v0_4_0::radar_collection::{Area, TxFrequency, TxSequence, Wa
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize, PartialEq, Clone)]
+#[serde(rename_all = "PascalCase")]
 pub struct RadarCollection {
-    #[serde(rename = "TxFrequency")]
     pub tx_frequency: TxFrequency,
-    #[serde(rename = "RefFreqIndex")]
     pub ref_freq_index: Option<i32>,
-    #[serde(rename = "Waveform")]
     pub waveform: Option<Waveform>,
-    #[serde(rename = "TxPolarization")]
     pub tx_polarization: TxPolarization,
-    #[serde(rename = "TxSequence")]
     pub tx_sequence: Option<TxSequence>,
-    #[serde(rename = "RcvChannels")]
     pub rcv_channels: RcvChannels,
-    #[serde(rename = "Area")]
     pub area: Option<Area>,
     #[serde(rename = "Parameter")]
     pub parameters: Option<Vec<Parameter>>,
@@ -28,19 +22,18 @@ pub struct TxPolarization {
 }
 
 #[derive(Debug, Deserialize, PartialEq, Clone)]
+#[serde(rename_all = "PascalCase")]
 pub struct RcvChannels {
     #[serde(rename = "@size")]
     pub size: u64,
-    #[serde(rename = "ChanParameters")]
     pub chan_parameters: Vec<ChanParameters>,
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]
+#[serde(rename_all = "PascalCase")]
 pub struct ChanParameters {
     #[serde(rename = "@index")]
     pub index: usize,
-    #[serde(rename = "TxRcvPolarization")]
     pub tx_rcv_polarization: TxRcvPolarization,
-    #[serde(rename = "RcvAPCIndex")]
     pub rcv_apc_index: Option<usize>,
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]

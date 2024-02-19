@@ -31,37 +31,30 @@ pub use radar_collection::RadarCollection;
 pub use radiometric::Radiometric;
 pub use scpcoa::SCPCOA;
 
+
+// Handle:
+// - fields not being present
+// - failing to parse properly 
+// without failing, while also not making them Option<T>. 
+
 #[derive(Debug, Deserialize, PartialEq, Clone)]
+#[serde(rename_all = "PascalCase")]
 pub struct SicdMeta {
-    #[serde(rename = "CollectionInfo")]
     pub collection_info: CollectionInfo,
-    #[serde(rename = "ImageCreation")]
     pub image_creation: Option<ImageCreation>,
-    #[serde(rename = "ImageData")]
     pub image_data: ImageData,
-    #[serde(rename = "GeoData")]
     pub geo_data: GeoData,
-    #[serde(rename = "Grid")]
     pub grid: Grid,
-    #[serde(rename = "Timeline")]
     pub timeline: Timeline,
-    #[serde(rename = "Position")]
     pub position: Position,
-    #[serde(rename = "RadarCollection")]
     pub radar_collection: RadarCollection,
-    #[serde(rename = "ImageFormation")]
     pub image_formation: ImageFormation,
     #[serde(rename = "SCPCOA")]
     pub scpcoa: SCPCOA,
-    #[serde(rename = "Radiometric")]
     pub radiometric: Option<Radiometric>,
-    #[serde(rename = "Antenna")]
     pub antenna: Option<Antenna>,
-    #[serde(rename = "ErrorStatistics")]
     pub error_statistics: Option<ErrorStatistics>,
-    #[serde(rename = "MatchInfo")]
     pub match_info: Option<MatchInfo>,
-    #[serde(rename = "RgAzComp")]
     pub rg_az_comp: Option<RgAzComp>,
     #[serde(rename = "PFA")]
     pub pfa: Option<PFA>,
@@ -76,6 +69,7 @@ pub struct Parameter {
     #[serde(rename = "$value")]
     pub value: Option<String>,
 }
+
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 pub enum SinglePolarization {
     V,
@@ -90,6 +84,8 @@ pub enum SinglePolarization {
     #[serde(other)]
     UNKNOWN,
 }
+
+// TODO-TD: consider custom rename all case
 #[allow(non_camel_case_types)]
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 pub enum DualPolarization {
@@ -270,64 +266,64 @@ mod tests {
 
     #[test]
     fn test_sicd_types() {
-        let xml = r#"<RowCol><Row>0</Row><Col>0</Col></RowCol>"#;
+        let xml: &str = r#"<RowCol><Row>0</Row><Col>0</Col></RowCol>"#;
         assert!(match from_str::<RowCol>(xml) {
             Ok(_) => true,
             Err(_) => false,
         });
 
-        let xml = r#"<IdxRowCol index="0"><Row>0</Row><Col>0</Col></IdxRowCol>
+        let xml: &str = r#"<IdxRowCol index="0"><Row>0</Row><Col>0</Col></IdxRowCol>
         "#;
         assert!(match from_str::<IdxRowCol>(xml) {
             Ok(_) => true,
             Err(_) => false,
         });
 
-        let xml = r#"<CMPLX><Real>0</Real><Imag>0</Imag></CMPLX>"#;
+        let xml: &str = r#"<CMPLX><Real>0</Real><Imag>0</Imag></CMPLX>"#;
         assert!(match from_str::<CMPLX>(xml) {
             Ok(_) => true,
             Err(_) => false,
         });
 
-        let xml = r#"<XYZ><X>0</X><Y>0</Y><Z>0</Z></XYZ>"#;
+        let xml: &str = r#"<XYZ><X>0</X><Y>0</Y><Z>0</Z></XYZ>"#;
         assert!(match from_str::<XYZ>(xml) {
             Ok(_) => true,
             Err(_) => false,
         });
 
-        let xml = r#"<LLH><Lat>0</Lat><Lon>0</Lon><HAE>0</HAE></LLH>"#;
+        let xml: &str = r#"<LLH><Lat>0</Lat><Lon>0</Lon><HAE>0</HAE></LLH>"#;
         assert!(match from_str::<LLH>(xml) {
             Ok(_) => true,
             Err(_) => false,
         });
 
-        let xml = r#"
+        let xml: &str = r#"
             <IdxLLH index="0"><Lat>0</Lat><Lon>0</Lon><HAE>0</HAE></IdxLLH>"#;
         assert!(match from_str::<IdxLLH>(xml) {
             Ok(_) => true,
             Err(_) => false,
         });
 
-        let xml = r#"<LL><Lat>0</Lat><Lon>0</Lon></LL>"#;
+        let xml: &str = r#"<LL><Lat>0</Lat><Lon>0</Lon></LL>"#;
         assert!(match from_str::<LL>(xml) {
             Ok(_) => true,
             Err(_) => false,
         });
 
-        let xml = r#"<IdxLL index="0"><Lat>0</Lat><Lon>0</Lon></IdxLL>"#;
+        let xml: &str = r#"<IdxLL index="0"><Lat>0</Lat><Lon>0</Lon></IdxLL>"#;
         assert!(match from_str::<IdxLL>(xml) {
             Ok(_) => true,
             Err(_) => false,
         });
 
-        let xml = r#"<Poly1d order1="1"><Coef1d exponent1="0">0</Coef1d>
+        let xml: &str = r#"<Poly1d order1="1"><Coef1d exponent1="0">0</Coef1d>
             <Coef1d exponent1="1">0</Coef1d></Poly1d>"#;
         assert!(match from_str::<Poly1D>(xml) {
             Ok(_) => true,
             Err(_) => false,
         });
 
-        let xml = r#"<Poly2d order1 = "1" order2 = "1">
+        let xml: &str = r#"<Poly2d order1 = "1" order2 = "1">
             <Coef2d exponent1="0" exponent2="0">0</Coef2d>
             <Coef2d exponent1="1" exponent2="0">0</Coef2d>
             <Coef2d exponent1="0" exponent2="1">0</Coef2d>
@@ -337,7 +333,7 @@ mod tests {
             Err(_) => false,
         });
 
-        let xml = r#"<XyzPoly>
+        let xml: &str = r#"<XyzPoly>
             <X order1="0"><Coef1d exponent1="0">0</Coef1d></X>
             <Y order1="0"><Coef1d exponent1="0">0</Coef1d></Y>
             <Z order1="0"><Coef1d exponent1="0">0</Coef1d></Z></XyzPoly>"#;
@@ -346,7 +342,7 @@ mod tests {
             Err(_) => false,
         });
 
-        let xml = r#"<IdxXyzPoly index="0">
+        let xml: &str = r#"<IdxXyzPoly index="0">
             <X order1="0"><Coef1d exponent1="0">0</Coef1d></X>
             <Y order1="0"><Coef1d exponent1="0">0</Coef1d></Y>
             <Z order1="0"><Coef1d exponent1="0">0</Coef1d></Z></IdxXyzPoly>"#;
@@ -355,7 +351,7 @@ mod tests {
             Err(_) => false,
         });
 
-        let xml = r#"
+        let xml: &str = r#"
             <Parameter name="Param0">TestP0</Parameter>
             <Parameter name="Param1">TestP1</Parameter>"#;
         assert!(match from_str::<Parameter>(xml) {
@@ -366,7 +362,7 @@ mod tests {
 
     #[test]
     fn test_empty_parameter() {
-        let xml = r#"
+        let xml: &str = r#"
             <Parameter name="Param0">      </Parameter>
             <Parameter name="Param1">TestP1</Parameter>"#;
         assert!(match from_str::<Parameter>(xml) {

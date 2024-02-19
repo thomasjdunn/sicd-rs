@@ -5,31 +5,24 @@ pub use crate::dep::v0_4_0::geo_data::{
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize, PartialEq, Clone)]
+#[serde(rename_all = "PascalCase")]
 pub struct GeoData {
-    #[serde(rename = "EarthModel")]
     pub earth_model: EarthModel,
     #[serde(rename = "SCP")]
     pub scp: SCP,
-    #[serde(rename = "ImageCorners")]
     pub image_corners: ImageCorners,
-    #[serde(rename = "ValidData")]
     pub valid_data: Option<ValidDataLL>,
-    #[serde(rename = "GeoInfo")]
     pub geo_info: Option<Vec<GeoInfo>>,
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]
+#[serde(rename_all = "PascalCase")]
 pub struct GeoInfo {
     #[serde(rename = "@name")]
     pub name: String,
-    #[serde(rename = "Desc")]
     pub desc: Option<Vec<Desc>>,
-    #[serde(rename = "Point")]
     pub point: Option<LL>,
-    #[serde(rename = "Line")]
     pub line: Option<Line>,
-    #[serde(rename = "Polygon")]
     pub polygon: Option<Polygon>,
-    #[serde(rename = "GeoInfo")]
     pub geo_info: Option<Vec<GeoInfo>>,
 }
 

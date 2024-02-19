@@ -13,5 +13,6 @@ num-complex = "0.4.3"
 nitf-rs = { version = "0.3.0" }
 ndarray = { version = "0.15", features = ["rayon"] }
 serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
 quick-xml = { version = "0.28", features = ["serialize"] }
 num-traits = "0.2.17"
