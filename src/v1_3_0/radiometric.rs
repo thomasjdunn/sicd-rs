@@ -1,32 +1,38 @@
 use super::Poly2D;
 use serde::Deserialize;
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct Radiometric {
-    pub noise_level: Option<NoiseLevel>,
+    #[serde(default)]
+    pub noise_level: NoiseLevel,
     #[serde(rename = "RCSSFPoly")]
-    pub rcssf_poly: Option<Poly2D>,
+    #[serde(default)]
+    pub rcssf_poly: Poly2D,
     #[serde(rename = "SigmaZeroSFPoly")]
-    pub sigma_zero_sf_poly: Option<Poly2D>,
+    #[serde(default)]
+    pub sigma_zero_sf_poly: Poly2D,
     #[serde(rename = "BetaZeroSFPoly")]
-    pub beta_zero_sf_poly: Option<Poly2D>,
+    #[serde(default)]
+    pub beta_zero_sf_poly: Poly2D,
     #[serde(rename = "GammaZeroSFPoly")]
-    pub gamma_zero_sf_poly: Option<Poly2D>,
+    #[serde(default)]
+    pub gamma_zero_sf_poly: Poly2D,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct NoiseLevel {
     pub noise_level_type: NoiseLevelType,
     pub noise_poly: Poly2D,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct NoiseLevelType {
     #[serde(rename = "$text")]
     pub value: NoiseLevelTypeEnum,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum NoiseLevelTypeEnum {
+    #[default]
     ABSOLUTE,
     RELATIVE,
 }

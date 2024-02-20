@@ -164,7 +164,7 @@ pub struct Coef2D {
     #[serde(rename = "$value")]
     pub value: f64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Poly2D {
     #[serde(rename = "@order1")]
     pub order1: usize,

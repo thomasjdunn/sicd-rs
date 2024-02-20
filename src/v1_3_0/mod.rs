@@ -51,7 +51,8 @@ pub struct SicdMeta {
     pub image_formation: ImageFormation,
     #[serde(rename = "SCPCOA")]
     pub scpcoa: SCPCOA,
-    pub radiometric: Option<Radiometric>,
+    #[serde(default)]
+    pub radiometric: Radiometric,
     pub antenna: Option<Antenna>,
     pub error_statistics: Option<ErrorStatistics>,
     pub match_info: Option<MatchInfo>,
@@ -67,7 +68,8 @@ pub struct Parameter {
     #[serde(rename = "@name")]
     pub name: String,
     #[serde(rename = "$value")]
-    pub value: Option<String>,
+    #[serde(default)]
+    pub value: String,
 }
 
 #[derive(Debug, Deserialize, PartialEq, Clone)]
