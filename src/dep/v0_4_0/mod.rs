@@ -140,14 +140,14 @@ pub struct IdxLL {
     #[serde(rename = "Lon")]
     pub lon: f64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Coef1D {
     #[serde(rename = "@exponent1")]
     pub exponent1: usize,
     #[serde(rename = "$value")]
     pub value: f64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Poly1D {
     #[serde(rename = "@order1")]
     pub order1: usize,
@@ -174,7 +174,7 @@ pub struct Poly2D {
     pub coefs: Vec<Coef2D>,
 }
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct XyzPoly {
     #[serde(rename = "X")]
     pub x: Poly1D,

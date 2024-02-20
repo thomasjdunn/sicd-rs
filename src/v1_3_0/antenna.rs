@@ -2,29 +2,37 @@ use super::{Poly1D, XyzPoly};
 pub use crate::dep::v0_4_0::antenna::{Array, Elem, EB};
 use serde::Deserialize;
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct Antenna {
-    pub tx: Option<AntennaType>,
-    pub rcv: Option<AntennaType>,
-    pub two_way: Option<AntennaType>,
+    #[serde(default)]
+    pub tx: AntennaType,
+    #[serde(default)]
+    pub rcv: AntennaType,
+    #[serde(default)]
+    pub two_way: AntennaType,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct AntennaType {
     pub x_axis_poly: XyzPoly,
     pub y_axis_poly: XyzPoly,
     pub freq_zero: f64,
     #[serde(rename = "EB")]
-    pub eb: Option<EB>,
+    #[serde(default)]
+    pub eb: EB,
     pub array: Array,
-    pub elem: Option<Elem>,
+    #[serde(default)]
+    pub elem: Elem,
     #[serde(rename = "GainBSPoly")]
-    pub gain_bs_poly: Option<Poly1D>,
+    #[serde(default)]
+    pub gain_bs_poly: Poly1D,
     #[serde(rename = "EBFreqShift")]
-    pub eb_freq_shift: Option<bool>,
+    #[serde(default)]
+    pub eb_freq_shift: bool,
     #[serde(rename = "MLFreqDilation")]
-    pub ml_freq_dilation: Option<bool>,
+    #[serde(default)]
+    pub ml_freq_dilation: bool,
 }
 
 #[cfg(test)]

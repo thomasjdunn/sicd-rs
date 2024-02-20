@@ -191,6 +191,8 @@ pub struct ImageType {
     #[serde(rename = "$text")]
     pub value: ImageTypeEnum,
 }
+
+// TODO-TD: set defaults for enums
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 pub enum ImageTypeEnum {
     RMAT,

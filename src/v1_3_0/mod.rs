@@ -53,7 +53,8 @@ pub struct SicdMeta {
     pub scpcoa: SCPCOA,
     #[serde(default)]
     pub radiometric: Radiometric,
-    pub antenna: Option<Antenna>,
+    #[serde(default)]
+    pub antenna: Antenna,
     pub error_statistics: Option<ErrorStatistics>,
     pub match_info: Option<MatchInfo>,
     pub rg_az_comp: Option<RgAzComp>,

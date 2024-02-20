@@ -33,7 +33,7 @@ pub struct AntennaType {
     #[serde(rename = "MLFreqDilation")]
     pub ml_freq_dilation: Option<bool>,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct EB {
     #[serde(rename = "DCXPoly")]
     pub dcx_poly: Poly1D,
@@ -47,14 +47,14 @@ pub struct HPBW {
     #[serde(rename = "DCY")]
     pub dcy: f64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Array {
     #[serde(rename = "GainPoly")]
     pub gain_poly: Poly2D,
     #[serde(rename = "PhasePoly")]
     pub phase_poly: Poly2D,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Elem {
     #[serde(rename = "GainPoly")]
     pub gain_poly: Poly2D,
