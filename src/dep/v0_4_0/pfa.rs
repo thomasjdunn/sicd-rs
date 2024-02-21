@@ -1,7 +1,7 @@
 use super::{Poly1D, Poly2D, XYZ};
 use serde::Deserialize;
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct PFA {
     #[serde(rename = "FPN")]
     pub fpn: XYZ,
@@ -22,10 +22,11 @@ pub struct PFA {
     #[serde(rename = "Kaz2")]
     pub kaz2: f64,
     #[serde(rename = "STDeskew")]
-    pub st_deskew: Option<STDeskew>,
+    #[serde(default)]
+    pub st_deskew: STDeskew,
 }
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct STDeskew {
     #[serde(rename = "Applied")]
     pub applied: bool,

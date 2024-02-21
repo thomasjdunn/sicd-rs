@@ -95,7 +95,7 @@ pub struct CMPLX {
     #[serde(rename = "Imag")]
     pub imag: f64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct XYZ {
     #[serde(rename = "X")]
     pub x: f64,
