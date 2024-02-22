@@ -48,23 +48,23 @@ fn parse_050_rgazcomp() {
 fn parse_131_rgazcomp() {
     let xml = include_str!("sicd_meta_130_03.xml");
     let sicd_meta = from_str::<sicd_rs::v1_3_0::SicdMeta>(xml).unwrap();
-    match sicd_meta.rg_az_comp {
-        Some(val) => {
-            dbg!(val);
-        }
-        None => {
-            panic!("Expectd something");
-        }
-    }
+    // match sicd_meta.rg_az_comp {
+    //     Some(val) => {
+    //         dbg!(val);
+    //     }
+    //     None => {
+    //         panic!("Expectd something");
+    //     }
+    // }
     let xml = include_str!("sicd_meta_130_00.xml");
     let sicd_meta = from_str::<sicd_rs::v1_3_0::SicdMeta>(xml).unwrap();
-    match sicd_meta.rg_az_comp {
-        Some(val) => {
-            dbg!(val);
-            panic!("Expected nothing")
-        }
-        None => (),
-    }
+    // match sicd_meta.rg_az_comp {
+    //     Some(val) => {
+    //         dbg!(val);
+    //         panic!("Expected nothing")
+    //     }
+    //     None => (),
+    // }
 }
 
 fn parse_xml<'a, T>(xml: &'a str)

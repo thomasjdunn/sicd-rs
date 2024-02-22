@@ -56,8 +56,10 @@ pub struct SicdMeta {
     #[serde(default)]
     pub antenna: Antenna,
     pub error_statistics: Option<ErrorStatistics>,
-    pub match_info: Option<MatchInfo>,
-    pub rg_az_comp: Option<RgAzComp>,
+    #[serde(default)]
+    pub match_info: MatchInfo,
+    #[serde(default)]
+    pub rg_az_comp: RgAzComp,
     #[serde(rename = "PFA")]
     #[serde(default)]
     pub pfa: PFA,

@@ -34,7 +34,7 @@ pub struct PolCal {
     pub distortion: Distortion,
 }
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct RgAzComp {
     #[serde(rename = "AzSF")]
