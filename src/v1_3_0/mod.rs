@@ -35,7 +35,8 @@ pub use scpcoa::SCPCOA;
 // Handle:
 // - fields not being present
 // - failing to parse properly 
-// without failing, while also not making them Option<T>. 
+// without failing 
+// not making them Option<T>. 
 
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
@@ -64,7 +65,8 @@ pub struct SicdMeta {
     #[serde(default)]
     pub pfa: PFA,
     #[serde(rename = "RMA")]
-    pub rma: Option<RMA>,
+    #[serde(default)]
+    pub rma: RMA,
 }
 
 #[derive(Debug, Deserialize, PartialEq, Clone)]
@@ -91,7 +93,7 @@ pub enum SinglePolarization {
     UNKNOWN,
 }
 
-// TODO-TD: consider custom rename all case
+// TODO-TD: consider creating custom rename all case
 #[allow(non_camel_case_types)]
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 pub enum DualPolarization {
