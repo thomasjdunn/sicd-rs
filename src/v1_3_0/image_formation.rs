@@ -42,19 +42,16 @@ pub struct RgAzComp {
     pub kaz_poly: Poly1D,
 }
 
-#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
+#[derive(Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "UPPERCASE")]
 pub struct RMA {
     #[serde(rename = "RMAlgoType")]
     pub rm_algo_type: RMAlgoType,
     #[serde(rename = "ImageType")]
     pub image_type: ImageType,
-    #[serde(default)]
-    pub rmat: RMAlgo,
-    #[serde(default)]
-    pub rmcr: RMAlgo,
-    #[serde(default)]
-    pub inca: INCA,
+    pub rmat: Option<RMAlgo>,
+    pub rmcr: Option<RMAlgo>,
+    pub inca: Option<INCA>,
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 pub struct ImageType {
@@ -67,7 +64,7 @@ pub enum ImageTypeEnum {
     RMCR,
     INCA,
 }
-#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
+#[derive(Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct RMAlgo {
     pub pos_ref: XYZ,

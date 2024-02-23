@@ -198,6 +198,7 @@ pub enum ImageTypeEnum {
     RMAT,
     INCA,
 }
+
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 pub struct RMAlgo {
     #[serde(rename = "RMRefTime")]

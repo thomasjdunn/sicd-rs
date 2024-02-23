@@ -65,8 +65,7 @@ pub struct SicdMeta {
     #[serde(default)]
     pub pfa: PFA,
     #[serde(rename = "RMA")]
-    #[serde(default)]
-    pub rma: RMA,
+    pub rma: Option<RMA>,
 }
 
 #[derive(Debug, Deserialize, PartialEq, Clone)]
