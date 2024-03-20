@@ -2,17 +2,18 @@ use super::Poly1D;
 use serde::Deserialize;
 use std::ops::Index;
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Timeline {
     #[serde(rename = "CollectStart")]
     pub collect_start: String,
     #[serde(rename = "CollectDuration")]
     pub collect_duration: f64,
     #[serde(rename = "IPP")]
-    pub ipp: Option<IppParams>,
+    #[serde(default)]
+    pub ipp: IppParams,
 }
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct IppParams {
     #[serde(rename = "Set")]
     pub set: Vec<IppSet>,
@@ -24,7 +25,7 @@ impl Index<usize> for IppParams {
     }
 }
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct IppSet {
     #[serde(rename = "TStart")]
     pub t_start: f64,

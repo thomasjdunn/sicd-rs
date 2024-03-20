@@ -72,14 +72,14 @@ pub struct SicdMeta {
     pub rma: Option<RMA>,
 }
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct RowCol {
     #[serde(rename = "Row")]
     pub row: i64,
     #[serde(rename = "Col")]
     pub col: i64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct IdxRowCol {
     #[serde(rename = "@index")]
     pub index: usize,
@@ -183,7 +183,7 @@ pub struct XyzPoly {
     #[serde(rename = "Z")]
     pub z: Poly1D,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct IdxXyzPoly {
     #[serde(rename = "@index")]
     pub index: usize,

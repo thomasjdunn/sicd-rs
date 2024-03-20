@@ -36,11 +36,14 @@ pub use scpcoa::SCPCOA;
 // - fields not being present
 // - failing to parse properly 
 
+// FIXME-TD: review all #defaults against standard
+
 #[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct SicdMeta {
     pub collection_info: CollectionInfo,
-    pub image_creation: Option<ImageCreation>,
+    #[serde(default)]
+    pub image_creation: ImageCreation,
     pub image_data: ImageData,
     pub geo_data: GeoData,
     pub grid: Grid,

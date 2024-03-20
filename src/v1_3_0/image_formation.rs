@@ -4,7 +4,7 @@ pub use crate::dep::v0_5_0::image_formation::{
     RcvChanProc, RgAutofocus, RgAutofocusEnum, STBeamComp, TxFrequencyProc, INCA,
 };
 use serde::Deserialize;
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct ImageFormation {
     pub rcv_chan_proc: RcvChanProc,
@@ -12,15 +12,18 @@ pub struct ImageFormation {
     pub t_start_proc: f64,
     pub t_end_proc: f64,
     pub tx_frequency_proc: TxFrequencyProc,
-    pub segment_identifier: Option<String>,
+    #[serde(default)]
+    pub segment_identifier: String,
     pub image_form_algo: ImageFormAlgo,
     #[serde(rename = "STBeamComp")]
     pub st_beam_comp: STBeamComp,
     pub image_beam_comp: ImageBeamComp,
     pub az_autofocus: AzAutofocus,
     pub rg_autofocus: RgAutofocus,
-    pub processing: Option<Vec<Processing>>,
-    pub polarization_calibration: Option<PolCal>,
+    #[serde(default)]
+    pub processing: Vec<Processing>,
+    #[serde(default)]
+    pub polarization_calibration: PolCal,
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 pub struct TxRcvPolarizationProc {

@@ -13,29 +13,32 @@ pub struct Grid {
     #[serde(rename = "Col")]
     pub col: DirectionParams,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct ImagePlane {
     #[serde(rename = "$text")]
     pub value: ImagePlaneEnum,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum ImagePlaneEnum {
     GROUND,
     SLANT,
+    #[default]
     OTHER,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct GridType {
     #[serde(rename = "$text")]
     pub value: GridTypeEnum,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum GridTypeEnum {
     RGAZIM,
     RGZERO,
     XRGYCR,
     XCTYAT,
     PLANE,
+    #[default]
+    UNKNOWN
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 pub struct DirectionParams {
@@ -62,14 +65,14 @@ pub struct DirectionParams {
     #[serde(rename = "WgtFunct")]
     pub wgt_funct: Option<WgtFunct>,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct WgtFunct {
     #[serde(rename = "@size")]
     pub size: u64,
     #[serde(rename = "Wgt")]
     pub wgt: Vec<Wgt>,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Wgt {
     #[serde(rename = "@index")]
     pub index: usize,

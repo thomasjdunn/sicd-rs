@@ -27,14 +27,16 @@ pub struct ImageFormation {
     #[serde(rename = "Processing")]
     pub processing: Option<Vec<Processing>>,
     #[serde(rename = "PolarizationCalibration")]
-    pub polarization_calibration: Option<PolCal>,
+    #[serde(default)]
+    pub polarization_calibration: PolCal,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct RcvChanProc {
     #[serde(rename = "NumChanProc")]
     pub num_chan_proc: u64,
     #[serde(rename = "PRFScaleFactor")]
-    pub prf_scale_factor: Option<f64>,
+    #[serde(default)]
+    pub prf_scale_factor: f64,
     #[serde(rename = "ChanIndex")]
     pub chan_index: Vec<usize>,
 }

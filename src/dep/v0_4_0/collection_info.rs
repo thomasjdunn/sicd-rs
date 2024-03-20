@@ -1,7 +1,7 @@
 use serde::Deserialize;
 
 use super::Parameter;
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct CollectionInfo {
     #[serde(rename = "CollectorName")]
     pub collector_name: String,

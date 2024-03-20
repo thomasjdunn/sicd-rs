@@ -1,7 +1,7 @@
 use super::{Parameter, Poly2D, XYZ};
 pub use crate::dep::v0_4_0::grid::{GridType, ImagePlane, WgtFunct};
 use serde::Deserialize;
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Grid {
     #[serde(rename = "ImagePlane")]
     pub image_plane: ImagePlane,
@@ -14,7 +14,7 @@ pub struct Grid {
     #[serde(rename = "Col")]
     pub col: DirectionParams,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct DirectionParams {
     #[serde(rename = "UVectECF")]
     pub u_vect_ecf: XYZ,
@@ -33,18 +33,22 @@ pub struct DirectionParams {
     #[serde(rename = "DeltaK2")]
     pub delta_k2: f64,
     #[serde(rename = "DeltaKCOAPoly")]
-    pub delta_kcoa_poly: Option<Poly2D>,
+    #[serde(default)]
+    pub delta_kcoa_poly: Poly2D,
     #[serde(rename = "WgtType")]
-    pub wgt_type: Option<WgtType>,
+    #[serde(default)]
+    pub wgt_type: WgtType,
     #[serde(rename = "WgtFunct")]
-    pub wgt_funct: Option<WgtFunct>,
+    #[serde(default)]
+    pub wgt_funct: WgtFunct,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct WgtType {
     #[serde(rename = "WindowName")]
     pub window_name: String,
     #[serde(rename = "Parameter")]
-    pub parameters: Option<Vec<Parameter>>,
+    #[serde(default)]
+    pub parameters: Vec<Parameter>,
 }
 
 #[cfg(test)]
