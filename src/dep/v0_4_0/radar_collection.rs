@@ -20,14 +20,14 @@ pub struct RadarCollection {
     #[serde(rename = "Parameter")]
     pub parameters: Option<Vec<Parameter>>,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct TxFrequency {
     #[serde(rename = "Min")]
     pub min: f64,
     #[serde(rename = "Max")]
     pub max: f64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Waveform {
     #[serde(rename = "@size")]
     pub size: u64,
@@ -39,35 +39,47 @@ pub struct WFParameters {
     #[serde(rename = "@index")]
     pub index: usize,
     #[serde(rename = "TxPulseLength")]
-    pub tx_pulse_length: Option<f64>,
+    #[serde(default)]
+    pub tx_pulse_length: f64,
     #[serde(rename = "TxRFBandwidth")]
-    pub tx_rf_bandwidth: Option<f64>,
+    #[serde(default)]
+    pub tx_rf_bandwidth: f64,
     #[serde(rename = "TxFreqStart")]
-    pub tx_freq_start: Option<f64>,
+    #[serde(default)]
+    pub tx_freq_start: f64,
     #[serde(rename = "TxFMRate")]
-    pub tx_fm_rate: Option<f64>,
+    #[serde(default)]
+    pub tx_fm_rate: f64,
     #[serde(rename = "RcvDemodType")]
-    pub rcv_demod_type: Option<RcvDemodType>,
+    #[serde(default)]
+    pub rcv_demod_type: RcvDemodType,
     #[serde(rename = "RcvWindowLength")]
-    pub rcv_window_length: Option<f64>,
+    #[serde(default)]
+    pub rcv_window_length: f64,
     #[serde(rename = "ADCSampleRate")]
-    pub adc_sample_rate: Option<f64>,
+    #[serde(default)]
+    pub adc_sample_rate: f64,
     #[serde(rename = "RcvIFBandwidth")]
-    pub rcv_if_bandwidth: Option<f64>,
+    #[serde(default)]
+    pub rcv_if_bandwidth: f64,
     #[serde(rename = "RcvFreqStart")]
-    pub rcv_freq_start: Option<f64>,
+    #[serde(default)]
+    pub rcv_freq_start: f64,
     #[serde(rename = "RcvFMRate")]
-    pub rcv_fm_rate: Option<f64>,
+    #[serde(default)]
+    pub rcv_fm_rate: f64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct RcvDemodType {
     #[serde(rename = "$text")]
     pub value: RcvDemodTypeEnum,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum RcvDemodTypeEnum {
     STRETCH,
     CHIRP,
+    #[default]
+    UNKNOWN
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 pub struct TxPolarization {
@@ -87,7 +99,7 @@ pub enum TxPolarizationEnum {
     OTHER,
     UNKNOWN,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct TxSequence {
     #[serde(rename = "@size")]
     pub size: u64,
@@ -99,21 +111,24 @@ pub struct TxStep {
     #[serde(rename = "@index")]
     pub index: usize,
     #[serde(rename = "WFIndex")]
-    pub wf_index: Option<usize>,
+    #[serde(default)]
+    pub wf_index: usize,
     #[serde(rename = "TxPolarization")]
-    pub tx_polarization: Option<TxStepPolarization>,
+    #[serde(default)]
+    pub tx_polarization: TxStepPolarization,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct TxStepPolarization {
     #[serde(rename = "$text")]
     pub value: TxStepPolarizationEnum,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum TxStepPolarizationEnum {
     V,
     H,
     RHC,
     LHC,
+    #[default]
     OTHER,
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]
@@ -132,19 +147,21 @@ pub struct ChanParameters {
     #[serde(rename = "RcvAPCIndex")]
     pub rcv_apc_index: Option<usize>,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Area {
     #[serde(rename = "Corner")]
-    pub corner: Option<Corner>,
+    #[serde(default)]
+    pub corner: Corner,
     #[serde(rename = "Plane")]
-    pub plane: Option<Plane>,
+    #[serde(default)]
+    pub plane: Plane,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Corner {
     #[serde(rename = "$value")]
     pub acp: Vec<IdxLLH>,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Plane {
     #[serde(rename = "RefPt")]
     pub ref_pt: RefPt,
@@ -153,14 +170,17 @@ pub struct Plane {
     #[serde(rename = "YDir")]
     pub y_dir: YDir,
     #[serde(rename = "SegmentList")]
-    pub segment_list: Option<SegmentList>,
+    #[serde(default)]
+    pub segment_list: SegmentList,
     #[serde(rename = "Orientation")]
-    pub orientation: Option<Orientation>,
+    #[serde(default)]
+    pub orientation: Orientation,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct RefPt {
     #[serde(rename = "@name")]
-    pub name: Option<String>,
+    #[serde(default)]
+    pub name: String,
     #[serde(rename = "ECF")]
     pub ecf: XYZ,
     #[serde(rename = "Line")]
@@ -168,7 +188,7 @@ pub struct RefPt {
     #[serde(rename = "Sample")]
     pub sample: f64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct XDir {
     #[serde(rename = "UVectECF")]
     pub u_vect_ecf: XYZ,
@@ -179,7 +199,7 @@ pub struct XDir {
     #[serde(rename = "FirstLine")]
     pub first_line: i32,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct YDir {
     #[serde(rename = "UVectECF")]
     pub u_vect_ecf: XYZ,
@@ -190,14 +210,14 @@ pub struct YDir {
     #[serde(rename = "FirstSample")]
     pub first_sample: i32,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct SegmentList {
     #[serde(rename = "@size")]
     pub size: u64,
     #[serde(rename = "Segment")]
     pub segment: Vec<Segment>,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Segment {
     #[serde(rename = "@index")]
     pub index: usize,
@@ -212,16 +232,17 @@ pub struct Segment {
     #[serde(rename = "Identifier")]
     pub identifier: String,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Orientation {
     #[serde(rename = "$text")]
     pub value: OrientationEnum,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum OrientationEnum {
     UP,
     DOWN,
     LEFT,
     RIGHT,
+    #[default]
     ARBITRARY,
 }

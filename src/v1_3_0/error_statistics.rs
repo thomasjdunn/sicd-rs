@@ -5,39 +5,48 @@ pub use crate::dep::v0_4_0::error_statistics::{
     Decorr, IonoError, PosVelErr, RadarSensor, TropoError,
 };
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct ErrorStatistics {
     #[serde(rename = "CompositeSCP")]
-    pub composite_scp: Option<CompositeSCP>,
-    pub components: Option<Components>,
-    pub unmodeled: Option<Unmodeled>,
-    pub additional_params: Option<Vec<Parameter>>,
+    #[serde(default)]
+    pub composite_scp: CompositeSCP,
+    #[serde(default)]
+    pub components: Components,
+    #[serde(default)]
+    pub unmodeled: Unmodeled,
+    #[serde(default)]
+    pub additional_params: Vec<Parameter>,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct CompositeSCP {
     pub rg: f64,
     pub az: f64,
     pub rg_az: f64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+
+// TODO-TD: defaults
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct Components {
     pub pos_vel_err: PosVelErr,
     pub radar_sensor: RadarSensor,
-    pub tropo_erro: Option<TropoError>,
-    pub iono_error: Option<IonoError>,
+    #[serde(default)]
+    pub tropo_erro: TropoError,
+    #[serde(default)]
+    pub iono_error: IonoError,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct Unmodeled {
     pub xrow: f64,
     pub ycol: f64,
     pub xrow_ycol: f64,
-    pub unmodeled_decorr: Option<UnmodeledDecorr>,
+    #[serde(default)]
+    pub unmodeled_decorr: UnmodeledDecorr,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct UnmodeledDecorr {
     pub xrow: Decorr,

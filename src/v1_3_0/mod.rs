@@ -35,10 +35,8 @@ pub use scpcoa::SCPCOA;
 // Handle:
 // - fields not being present
 // - failing to parse properly 
-// without failing 
-// not making them Option<T>. 
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct SicdMeta {
     pub collection_info: CollectionInfo,
@@ -56,7 +54,8 @@ pub struct SicdMeta {
     pub radiometric: Radiometric,
     #[serde(default)]
     pub antenna: Antenna,
-    pub error_statistics: Option<ErrorStatistics>,
+    #[serde(default)]
+    pub error_statistics: ErrorStatistics,
     #[serde(default)]
     pub match_info: MatchInfo,
     #[serde(default)]
@@ -65,10 +64,11 @@ pub struct SicdMeta {
     #[serde(default)]
     pub pfa: PFA,
     #[serde(rename = "RMA")]
-    pub rma: Option<RMA>,
+    #[serde(default)]
+    pub rma: RMA,
 }
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Parameter {
     #[serde(rename = "@name")]
     pub name: String,
@@ -77,7 +77,7 @@ pub struct Parameter {
     pub value: String,
 }
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum SinglePolarization {
     V,
     H,
@@ -89,12 +89,13 @@ pub enum SinglePolarization {
     LHC,
     OTHER,
     #[serde(other)]
+    #[default]
     UNKNOWN,
 }
 
 // TODO-TD: consider creating custom rename all case
 #[allow(non_camel_case_types)]
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum DualPolarization {
     #[serde(rename = "V:V")]
     V_V,
@@ -260,6 +261,7 @@ pub enum DualPolarization {
     OTHER_OTHER,
     OTHER,
     #[serde(other)]
+    #[default]
     UNKNOWN,
 }
 
