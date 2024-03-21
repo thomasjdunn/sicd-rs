@@ -66,11 +66,10 @@ pub struct ImageType {
 }
 #[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum ImageTypeEnum {
+    #[default]
     RMAT,
     RMCR,
     INCA,
-    #[default]
-    UNKNOWN
 }
 #[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
