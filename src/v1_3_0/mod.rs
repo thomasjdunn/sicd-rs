@@ -32,11 +32,7 @@ pub use radiometric::Radiometric;
 pub use scpcoa::SCPCOA;
 
 
-// Handle:
-// - fields not being present
-// - failing to parse properly 
-
-// FIXME-TD: review all #defaults against standard
+// FIXME-TD: Deserde error handling
 
 #[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
