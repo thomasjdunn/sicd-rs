@@ -25,12 +25,12 @@ pub struct ImageFormation {
     #[serde(default)]
     pub polarization_calibration: PolCal,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct TxRcvPolarizationProc {
     #[serde(rename = "$text")]
     pub value: DualPolarization,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct PolCal {
     pub distort_correction_applied: bool,
@@ -45,29 +45,34 @@ pub struct RgAzComp {
     pub kaz_poly: Poly1D,
 }
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "UPPERCASE")]
 pub struct RMA {
     #[serde(rename = "RMAlgoType")]
     pub rm_algo_type: RMAlgoType,
     #[serde(rename = "ImageType")]
     pub image_type: ImageType,
-    pub rmat: Option<RMAlgo>,
-    pub rmcr: Option<RMAlgo>,
-    pub inca: Option<INCA>,
+    #[serde(default)]
+    pub rmat: RMAlgo,
+    #[serde(default)]
+    pub rmcr: RMAlgo,
+    #[serde(default)]
+    pub inca: INCA,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct ImageType {
     #[serde(rename = "$text")]
     pub value: ImageTypeEnum,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum ImageTypeEnum {
     RMAT,
     RMCR,
     INCA,
+    #[default]
+    UNKNOWN
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct RMAlgo {
     pub pos_ref: XYZ,

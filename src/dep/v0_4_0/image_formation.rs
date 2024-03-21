@@ -27,7 +27,6 @@ pub struct ImageFormation {
     #[serde(rename = "Processing")]
     pub processing: Option<Vec<Processing>>,
     #[serde(rename = "PolarizationCalibration")]
-    #[serde(default)]
     pub polarization_calibration: PolCal,
 }
 #[derive(Default, Debug, Deserialize, PartialEq, Clone)]
@@ -40,64 +39,69 @@ pub struct RcvChanProc {
     #[serde(rename = "ChanIndex")]
     pub chan_index: Vec<usize>,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct TxFrequencyProc {
     #[serde(rename = "MinProc")]
     pub min_proc: f64,
     #[serde(rename = "MaxProc")]
     pub max_proc: f64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct ImageFormAlgo {
     #[serde(rename = "$text")]
     pub value: ImageFormAlgoEnum,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum ImageFormAlgoEnum {
     PFA,
     RMA,
     RGAZCOMP,
+    #[default]
     OTHER,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct STBeamComp {
     #[serde(rename = "$text")]
     pub value: STBeamCompEnum,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum STBeamCompEnum {
+    #[default]
     NO,
     GLOBAL,
     SV,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct ImageBeamComp {
     #[serde(rename = "$text")]
     pub value: ImageBeamCompEnum,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum ImageBeamCompEnum {
+    #[default]
     NO,
     SV,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct AzAutofocus {
     #[serde(rename = "$text")]
     pub value: AzAutofocusEnum,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum AzAutofocusEnum {
+    #[default]
     NO,
     GLOBAL,
     SV,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct RgAutofocus {
     #[serde(rename = "$text")]
     pub value: RgAutofocusEnum,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum RgAutofocusEnum {
+    #[default]
     NO,
     GLOBAL,
     SV,
@@ -120,10 +124,11 @@ pub struct PolCal {
     #[serde(rename = "Distortion")]
     pub distortion: Distortion,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Distortion {
     #[serde(rename = "CalibrationDate")]
-    pub calibration_date: Option<String>,
+    #[serde(default)]
+    pub calibration_date: String,
     #[serde(rename = "A")]
     pub a: f64,
     #[serde(rename = "F1")]
@@ -139,15 +144,20 @@ pub struct Distortion {
     #[serde(rename = "Q4")]
     pub q4: CMPLX,
     #[serde(rename = "GainErrorA")]
-    pub gain_error_a: Option<f64>,
+    #[serde(default)]
+    pub gain_error_a: f64,
     #[serde(rename = "GainErrorF1")]
-    pub gain_error_f1: Option<f64>,
+    #[serde(default)]
+    pub gain_error_f1: f64,
     #[serde(rename = "GainErrorF2")]
-    pub gain_error_f2: Option<f64>,
+    #[serde(default)]
+    pub gain_error_f2: f64,
     #[serde(rename = "PhaseErrorF1")]
-    pub phase_error_f1: Option<f64>,
+    #[serde(default)]
+    pub phase_error_f1: f64,
     #[serde(rename = "PhaseErrorF2")]
-    pub phase_error_f2: Option<f64>,
+    #[serde(default)]
+    pub phase_error_f2: f64,
 }
 
 #[derive(Debug, Deserialize, PartialEq, Clone)]
@@ -175,18 +185,20 @@ pub struct RMA {
     #[serde(rename = "INCA")]
     pub inca: Option<INCA>,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct RMAlgoType {
     #[serde(rename = "$text")]
     pub value: RMAlgoTypeEnum,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum RMAlgoTypeEnum {
     #[serde(rename = "OMEGA_K")]
     OMEGAK,
     CSA,
     #[serde(rename = "RG_DOP")]
     RGDOP,
+    #[default]
+    UNKNOWN
 }
 #[derive(Debug, Deserialize, PartialEq, Clone)]
 pub struct ImageType {
@@ -201,7 +213,7 @@ pub enum ImageTypeEnum {
     INCA,
 }
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct RMAlgo {
     #[serde(rename = "RMRefTime")]
     pub ref_time: f64,
@@ -218,7 +230,7 @@ pub struct RMAlgo {
     #[serde(rename = "Ky2")]
     pub ky2: f64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct INCA {
     #[serde(rename = "TimeCAPoly")]
     pub time_ca_poly: Poly1D,
@@ -229,7 +241,9 @@ pub struct INCA {
     #[serde(rename = "DRateSFPoly")]
     pub d_rate_sf_poly: Poly2D,
     #[serde(rename = "DopCentroidPoly")]
-    pub dop_centroid_poly: Option<Poly2D>,
+    #[serde(default)]
+    pub dop_centroid_poly: Poly2D,
     #[serde(rename = "DopCentroidCOA")]
-    pub dop_centroid_coa: Option<bool>,
+    #[serde(default)]
+    pub dop_centroid_coa: bool,
 }

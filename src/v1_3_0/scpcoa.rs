@@ -2,7 +2,7 @@ use super::XYZ;
 pub use crate::dep::v0_4_0::scpcoa::SideOfTrack;
 use serde::Deserialize;
 
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct SCPCOA {
     #[serde(rename = "SCPTime")]

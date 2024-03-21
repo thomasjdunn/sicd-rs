@@ -14,24 +14,25 @@ pub struct GeoData {
     #[serde(rename = "GeoInfo")]
     pub geo_info: Option<Vec<GeoInfo>>,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct EarthModel {
     #[serde(rename = "$text")]
     pub value: EarthModelEnum,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum EarthModelEnum {
     #[serde(rename = "WGS_84")]
+    #[default]
     WGS84,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct SCP {
     #[serde(rename = "ECF")]
     pub ecf: XYZ,
     #[serde(rename = "LLH")]
     pub llh: LLH,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct ImageCorners {
     #[serde(rename = "ICP")]
     pub icp: Vec<ICP>,
@@ -45,7 +46,7 @@ pub struct ICP {
     #[serde(rename = "Lon")]
     pub lon: f64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct ValidDataLL {
     #[serde(rename = "@size")]
     pub size: u64,
@@ -74,14 +75,14 @@ pub struct Desc {
     #[serde(rename = "$value")]
     pub value: Option<String>,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Line {
     #[serde(rename = "@size")]
     pub size: u64,
     #[serde(rename = "Endpoint")]
     pub endpoint: Vec<IdxLL>,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct Polygon {
     #[serde(rename = "@size")]
     pub size: u64,

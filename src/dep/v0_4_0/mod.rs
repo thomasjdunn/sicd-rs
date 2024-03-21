@@ -88,7 +88,7 @@ pub struct IdxRowCol {
     #[serde(rename = "Col")]
     pub col: i64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct CMPLX {
     #[serde(rename = "Real")]
     pub real: f64,
@@ -104,7 +104,7 @@ pub struct XYZ {
     #[serde(rename = "Z")]
     pub z: f64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct LLH {
     #[serde(rename = "Lat")]
     pub lat: f64,
@@ -124,7 +124,7 @@ pub struct IdxLLH {
     #[serde(rename = "HAE")]
     pub hae: f64,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct LL {
     #[serde(rename = "Lat")]
     pub lat: f64,

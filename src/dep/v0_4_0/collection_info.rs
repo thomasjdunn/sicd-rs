@@ -35,20 +35,22 @@ pub enum CollectTypeEnum {
 fn default_classification() -> String {
     String::from("UNCLASSIFIED")
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct RadarMode {
     #[serde(rename = "ModeType")]
     pub mode_type: ModeType,
     #[serde(rename = "ModeID")]
-    pub mode_id: Option<String>,
+    #[serde(default)]
+    pub mode_id: String,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub struct ModeType {
     #[serde(rename = "$text")]
     pub value: ModeTypeEnum,
 }
-#[derive(Debug, Deserialize, PartialEq, Clone)]
+#[derive(Default, Debug, Deserialize, PartialEq, Clone)]
 pub enum ModeTypeEnum {
+    #[default]
     SPOTLIGHT,
     STRIPMAP,
     #[serde(rename = "DYNAMIC STRIPMAP")]
